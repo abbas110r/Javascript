@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="stylecalc.css" />
+  </head>
+  <body>
+    <div class="container">
+      <input type="text" id="display" placeholder="0" />
+      <button onclick="display()">0</button>
+      <button value="1" onclick="dis('1')">1</button>
+      <button value="2" onclick="dis('2')">2</button>
+      <button value="3" onclick="dis('3')">3</button>
+      <button value="4" onclick="dis('4')">4</button>
+      <button value="5" onclick="dis('5')">5</button>
+      <button value="6" onclick="dis('6')">6</button>
+      <button value="7" onclick="dis('7')">7</button>
+      <button value="8" onclick="dis('8')">8</button>
+      <button value="9" onclick="dis('9')">9</button>
+      <button value="+" onclick="dis('+')">+</button>
+      <button value="-" onclick="dis('-')">-</button>
+      <button value="*" onclick="dis('*')">x</button>
+      <button value="/" onclick="dis('/')">/</button>
+      <button value="=" onclick="solve()">=</button>
+      <button value="c" onclick="clr()" id="last">Clear</button>
+    </div>
+    <div id="output"></div>
+    <script src="calc.js"></script>
+  </body>
+</html>

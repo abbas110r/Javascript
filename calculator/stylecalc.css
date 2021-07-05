@@ -1,0 +1,39 @@
+.container {
+  display: grid;
+  grid-template-rows: repeat(10, 4rem);
+  grid-template-columns: repeat(3, 7rem);
+  column-gap: 0.5rem;
+  row-gap: 0.5rem;
+  margin-left: 1rem;
+  margin-top: 1rem;
+}
+#display {
+  grid-area: 1/1/2/-1;
+}
+button,
+input {
+  font-size: 1.5rem;
+}
+button {
+  border: none;
+  border-radius: 5px;
+  background-color: lightcoral;
+  color: aliceblue;
+  box-shadow: 2px 2px 3px rgba(216, 216, 216, 0.8);
+  opacity: 0.8;
+}
+button:hover {
+  cursor: pointer;
+  background-color: coral;
+}
+input {
+  border-radius: 5px;
+  border: 2px solid coral;
+}
+.output {
+  height: 2rem;
+  background-color: lightgrey;
+}
+#last {
+  grid-area: 7/1/8/-1;
+}
