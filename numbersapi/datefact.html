@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random Number Facts</title>
+    <link rel="stylesheet" href="bootstrap.min.css" />
+    <style>
+        body{
+            margin-top: 10rem;
+            
+        }
+        div.one{
+            width:30rem;
+            padding: 2rem 2rem;
+            box-shadow: 2px 3px 10px rgba(0,0, 0, 0.4); 
+            background-color: dodgerblue;
+            color: white;
+            border-radius: 10px;
+        }
+        input{
+            height: 2.5rem;
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid white;
+            margin-bottom: 1rem;
+        }
+        input:focus{
+            border: 2px solid dodgerblue;
+        }
+        
+       
+    </style>
+    
+  </head>
+  <body>
+    <div class="container one">
+      <h1>Date Facts</h1>
+      <p>Enter a day and month and get a random fact</p>
+      <form method="get">
+        <input type="number" id="month" placeholder="Enter a month" min="1" max="12" />
+        <input type="number" id="day" placeholder="Enter a day" min="1" max="31"/>
+        <p><h3>Date Fact</h3><span id="output"></span></p>
+      </form>
+    </div>
+    <script>
+        document.getElementById('month').addEventListener('input',display);
+        document.getElementById('day').addEventListener('input',display);
+        function display(){
+            let month=document.getElementById('month').value;
+            let day=document.getElementById('day').value;
+            console.log(month);
+            console.log(day);
+                if(month!='' && day!=''){
+                            let xhr = new XMLHttpRequest();
+                            xhr.open('GET','http://numbersapi.com/'+month+'/'+day ,true);
+                            xhr.onload=function(){
+                                if(this.status==200){
+                                    document.getElementById('output').innerHTML=this.responseText;
+                                }
+                            }
+                            xhr.send();
+                        }
+                else if (month=='' || day==''){
+                    document.getElementById('output').innerHTML='';
+                }
+
+        }
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random Number Facts</title>
+    <link rel="stylesheet" href="bootstrap.min.css" />
+    <style>
+        body{
+            margin-top: 10rem;
+            
+        }
+        div.one{
+            width:30rem;
+            padding: 2rem 2rem;
+            box-shadow: 2px 3px 10px rgba(0,0, 0, 0.4); 
+            background-color: dodgerblue;
+            color: white;
+            border-radius: 10px;
+        }
+        input{
+            height: 2.5rem;
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid white;
+            
+        }
+       
+    </style>
+    
+  </head>
+  <body>
+    <div class="container one">
+      <h1>Number Facts</h1>
+      <p>Enter a number and get a random fact</p>
+      <form method="get">
+        <input type="number" name="number" id="input"placeholder="Enter a number" />
+        <p><h3>Number Fact</h3><span id="output"></span></p>
+      </form>
+    </div>
+    <script>
+        document.getElementById('input').addEventListener('input',display);
+        function display(e){
+            let userInput=e.target.value;
+                if(userInput!=''){
+                            let xhr = new XMLHttpRequest();
+                            xhr.open('GET','http://numbersapi.com/'+userInput,true);
+                            xhr.onload=function(){
+                                if(this.status==200){
+                                    document.getElementById('output').innerHTML=this.responseText;
+                                }
+                            }
+                            xhr.send();
+                        }
+                else{
+                    document.getElementById('output').innerHTML='';
+                }
+
+        }
+    </script>
+
+  </body>
+</html>
