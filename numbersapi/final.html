@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="bootstrap.min.css" />
+    <style>
+      body {
+        margin-top: 10rem;
+      }
+      div.one {
+        width: 30rem;
+        padding: 2rem 2rem;
+        box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.4);
+        background-color: dodgerblue;
+        color: white;
+        border-radius: 10px;
+      }
+      input {
+        height: 2.5rem;
+        width: 100%;
+        border-radius: 5px;
+        border: 1px solid white;
+        margin-bottom: 1rem;
+      }
+      select {
+        border-radius: 5px;
+      }
+      input:focus {
+        border: 2px solid dodgerblue;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container one">
+      <h1 id="heading">Random Facts</h1>
+      <form method="GET" id="form">
+        <label for="options">Choose an option</label>
+        <select name="options" id="options">
+          <option value="choose" selected>Choose</option>
+          <option value="number">number</option>
+          <option value="date">date</option>
+        </select>
+      </form>
+      <p id="text"></p>
+    </div>
+    <script>
+      document.getElementById('options').addEventListener('change', display);
+
+      let form = document.getElementById('form');
+      function display(e) {
+        let optionselected = e.target.value;
+        if (optionselected == 'number') {
+          document.getElementById('heading').innerHTML = 'Number Facts';
+          document.getElementById('text').innerHTML = 'Enter a number';
+          let child = document.createElement('input');
+          child.id = 'number';
+          child.type = 'number';
+          child.placeholder = 'Enter a number';
+          child.style.marginTop = '1rem';
+          form.appendChild(child);
+          //   form.innerHTML =
+          //     "<input type='number' id='number' placeholder='Enter a number'>  ";
+          document
+            .querySelector('#number')
+            .addEventListener('input', getFactByNum);
+          function getFactByNum(e) {
+            let userInput = e.target.value;
+            console.log(userInput);
+            if (userInput != '') {
+              let xhr = new XMLHttpRequest();
+              xhr.open('GET', 'http://numbersapi.com/' + userInput, true);
+              xhr.onload = function () {
+                if (this.status == 200) {
+                  document.getElementById('text').innerHTML = this.responseText;
+                }
+              };
+              xhr.send();
+            } else {
+              document.getElementById('text').innerHTML = '';
+            }
+          }
+        } else if (optionselected == 'date') {
+          document.getElementById('text').innerHTML = 'Enter the month and day';
+          document.getElementById('heading').innerHTML = 'Facts About Date';
+          let childmonth = document.createElement('input');
+          childmonth.id = 'month';
+          childmonth.type = 'number';
+          childmonth.min = 1;
+          childmonth.max = 12;
+          childmonth.placeholder = 'Enter the month';
+          childmonth.style.marginTop = '1rem';
+          form.appendChild(childmonth);
+          let childday = document.createElement('input');
+          childday.id = 'day';
+          childmonth.type = 'number';
+          childday.min = 1;
+          childday.max = 31;
+          childday.placeholder = 'Enter the day';
+          childday.style.marginTop = '1rem';
+          form.appendChild(childday);
+          document.getElementById('month').addEventListener('input', display);
+          document.getElementById('day').addEventListener('input', display);
+          function display() {
+            let month = document.getElementById('month').value;
+            let day = document.getElementById('day').value;
+            console.log(month);
+            console.log(day);
+            if (month != '' && day != '') {
+              let xhr = new XMLHttpRequest();
+              xhr.open(
+                'GET',
+                'http://numbersapi.com/' + month + '/' + day,
+                true
+              );
+              xhr.onload = function () {
+                if (this.status == 200) {
+                  document.getElementById('text').innerHTML = this.responseText;
+                }
+              };
+              xhr.send();
+            } else if (month == '' || day == '') {
+              document.getElementById('text').innerHTML = '';
+            }
+          }
+        } else {
+          document.getElementById('text').innerHTML = '';
+        }
+      }
+    </script>
+  </body>
+</html>
